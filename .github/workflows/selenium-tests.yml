@@ -13,7 +13,6 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v4
 
-      # Uses the clean, stable setup approach matching your working local structure
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
@@ -21,13 +20,19 @@ jobs:
           java-version: '17'
           cache: maven
 
+      # Using the updated market version to comply with environment constraints
       - name: Set up Chrome Browser
-        uses: browser-actions/setup-chrome@v1
+        uses: browser-actions/setup-chrome@v3
+        with:
+          chrome-version: stable
 
       - name: Verify Java and Chrome Versions
         run: |
           java -version
           google-chrome --version
 
+      # Workaround: Automatically swap the hosted URL back to a local path file just for GitHub
       - name: Run Selenium Test Suite
-        run: mvn clean test
+        run: |
+          sed -i 's|http://web-app/login.html|file:///${{ github.workspace }}/webapp/login.html|g' src/test/java/selenium/LoginTest.java
+          mvn clean test
