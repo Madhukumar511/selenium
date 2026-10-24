@@ -1,0 +1,8 @@
+# Use a clean, lightweight web server base image
+FROM nginx:alpine
+
+# Copy your local webapp folder into the web server directory
+COPY webapp/ /usr/share/nginx/html/
+
+# Expose the web server port gateway
+EXPOSE 80

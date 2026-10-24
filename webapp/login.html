@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+</head>
+<body>
+    <h2>Login</h2>
+    <form onsubmit="event.preventDefault(); document.getElementById('message').innerText = 'Login Successful!';">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username"><br><br>
+        
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password"><br><br>
+        
+        <input type="submit" id="loginButton" value="Submit"><br><br>
+    </form>
+
+    <div id="message"></div>
+</body>
+</html>
