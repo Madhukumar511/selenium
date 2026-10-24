@@ -1,7 +1,6 @@
 version: '3.8'
 
 services:
-  # Starts your website live on port 8085
   web-app:
     build:
       context: .
@@ -10,7 +9,6 @@ services:
     ports:
       - "8085:80"
 
-  # Starts your Selenium test suite and links it to the web app
   selenium-test:
     image: selenium-runner:latest
     container_name: automation-runner
