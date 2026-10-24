@@ -20,18 +20,16 @@ jobs:
           java-version: '17'
           cache: maven
 
-      # Using the updated market version to comply with environment constraints
+      # Fixed version parameter to target the official stable release
       - name: Set up Chrome Browser
-        uses: browser-actions/setup-chrome@v3
-        with:
-          chrome-version: stable
+        uses: browser-actions/setup-chrome@v1
 
       - name: Verify Java and Chrome Versions
         run: |
           java -version
           google-chrome --version
 
-      # Workaround: Automatically swap the hosted URL back to a local path file just for GitHub
+      # Automatically changes the hosted web-app address to a file path layout for the cloud runner
       - name: Run Selenium Test Suite
         run: |
           sed -i 's|http://web-app/login.html|file:///${{ github.workspace }}/webapp/login.html|g' src/test/java/selenium/LoginTest.java
