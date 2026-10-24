@@ -20,7 +20,6 @@ jobs:
           java-version: '17'
           cache: maven
 
-      # Fixed version parameter to target the official stable release
       - name: Set up Chrome Browser
         uses: browser-actions/setup-chrome@v1
 
@@ -29,7 +28,7 @@ jobs:
           java -version
           google-chrome --version
 
-      # Automatically changes the hosted web-app address to a file path layout for the cloud runner
+      # Automatically updates the target hosted address to a secure relative local file path on the cloud machine
       - name: Run Selenium Test Suite
         run: |
           sed -i 's|http://web-app/login.html|file:///${{ github.workspace }}/webapp/login.html|g' src/test/java/selenium/LoginTest.java
